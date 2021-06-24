@@ -1,10 +1,13 @@
 <?php
+
+
 // შევამოწმოთ თუ ფორმა არის დასაბმითებული და $_GET მასივის ტიპის ცვლადში გვაქვს name და position KEY ჩანაწერი
 // თუ მოცემული პირობა არის სწორი მაშინ უზერის გამოგზავნილი ინფო ფორმიდან შევინახოთ ფაილში
 if (isset($_GET['name']) && isset($_GET['position'])) {
     $fileText = "UserName: {$_GET['name']}, position: {$_GET['position']}";
     file_put_contents('file_name.txt', $fileText);
 }
+
 
 $employ = [
     'name' => 'Nika',
