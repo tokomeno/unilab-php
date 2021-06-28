@@ -27,3 +27,7 @@
 
 - https://www.facebook.com/groups/remote.work.georgian.community/
    
+
+
+# talks
+https://www.youtube.com/watch?v=7EmboKQH8lM&t=2310s&ab_channel=UnityCoin
