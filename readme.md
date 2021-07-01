@@ -6,6 +6,7 @@
 - session: https://www.w3schools.com/php/php_sessions.asp
 
 # PHP და laravel
+- PHP ქართული თუთორიალი: https://www.youtube.com/watch?v=H16bCSk-qXk&t=18071s&ab_channel=%E1%83%90%E1%83%9E%E1%83%9D%E1%83%9A%E1%83%9D11
  - https://laracasts.com/
   - php კურსი ნულიდან https://laracasts.com/series/php-for-beginners
   - ლარაველის კურსი ნულიდან https://laracasts.com/series/laravel-8-from-scratch
