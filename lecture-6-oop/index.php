@@ -102,11 +102,9 @@ class Student
 
 $group = new Group("PHP Group");
 
-// $group->setPrice(500);
-
-
 
 $student1 = new Student("Dato", "Davitadze");
+
 $student1->addPoint(40);
 $student1->addPoint(15);
 
@@ -138,10 +136,7 @@ echo "ALl Users";
 echo $group->getStudentsInfo();
 
 
-
-
 echo "<br>";
-
 
 echo "List failed Students :";
 echo $group->getFailedStudentsList();
@@ -156,10 +151,6 @@ echo $group->getFailedStudentsList();
 
 
 // print_r($group->students);
-
-
-
-
 
 
 
