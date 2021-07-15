@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\BlogController;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,22 +15,45 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
 
+    // Blog::create();
+    // $blog = new Blog();
+    // $blog->title = 'this new recorc';
+    // $blog->text = "this is new text for blog";
+    // $blog->save();
 
+    // Blog::create([
+    //     'title' => 'record two',
+    //     'text' => 'text record two',
+    // ]);
 
-
-
-Route::get('/home', function () {
     return view('home');
 });
 
+
+
+
 Route::get('/blog', [BlogController::class, 'index']);
-
-
+Route::get('/blog/create', [BlogController::class, 'create']);
+ 
 Route::get('/blog/{id}', [BlogController::class, 'show']);
+
+
+
+
+Route::get('/blog/{id}/edit', [BlogController::class, 'edit']);
+
+Route::post('/blog/save', [BlogController::class, 'save']);
+
+Route::post('/blog/{id}', [BlogController::class, 'update']);
+
+
+
+
 
 
 // Route::get('/blog', function () {

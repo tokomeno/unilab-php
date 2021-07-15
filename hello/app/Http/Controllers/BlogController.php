@@ -2,47 +2,89 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
 
-    public $blogs;
 
-    public function __construct()
-    {
 
-        $this->blogs = [
-            0 => [
-                'title' => "some info about php",
-                'text' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, ullam. Id deserunt fuga sed modi sapiente ipsum esse dolores necessitatibus exercitationem? Ratione id eum inventore sequi odit labore nesciunt aperiam.'
-            ],
-            1 => [
-                'title' => "Java",
-                'text' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, ullam. Id deserunt fuga sed modi sapiente ipsum esse dolores necessitatibus exercitationem? Ratione id eum inventore sequi odit labore nesciunt aperiam.'
-            ],
-            2 => [
-                'title' => "Laravel",
-                'text' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, ullam. Id deserunt fuga sed modi sapiente ipsum esse dolores necessitatibus exercitationem? Ratione id eum inventore sequi odit labore nesciunt aperiam.'
-            ],
-            3 => [
-                'title' => "Javascript",
-                'text' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, ullam. Id deserunt fuga sed modi sapiente ipsum esse dolores necessitatibus exercitationem? Ratione id eum inventore sequi odit labore nesciunt aperiam.'
-            ]
-        ];
-    }
+
 
     public function index()
     {
 
+        $blogs = Blog::all();
 
-        return view('blog', ['blogs' => $this->blogs]);
+        // dd($blogs->toArray());
+
+        return view('blog', ['blogs' => $blogs]);
     }
 
     public function show($id)
+    
     {
-        $blog = $this->blogs[$id];
- 
-        return view('blog-show', compact('blog'));
+
+         
+        $blog = Blog::findOrFail($id);
+        
+        
+        // $blog = Blog::find($id);
+        // if(!$blog){
+        //     abort(404);
+        // }
+        
+
+        return view('blog.show', compact('blog'));
+    }
+
+    public function create()
+    {
+
+        return view('blog.create');
+    }
+
+
+
+    public function save()
+    {
+        
+        
+        request()->validate([
+            'title' => ['required'],
+            'text' => ['required',  'min:10'],
+        ]);
+        
+
+
+        $blog = new Blog;
+        $blog->title = request()->title;
+        $blog->text = request()->text;
+        $blog->save();
+
+
+        return redirect('/blog');
+    }
+
+
+    public function edit($id){
+
+        $blog = Blog::findOrFail($id);
+
+        return view('blog.edit', compact('blog'));
+    }
+
+
+    public function update($id){
+
+       
+        $blog = Blog::findOrFail($id);
+        $blog->title = request()->title;
+        $blog->text = request()->text;
+        $blog->save();
+
+        return redirect("/blog/{$blog->id}");
+
     }
 }

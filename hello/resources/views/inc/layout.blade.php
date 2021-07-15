@@ -9,16 +9,21 @@
 </head>
 
 <body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/blog">blog</a>
+        <a href="/blog/create">Add new Blog</a>
+    </nav>
 
-    <a href="/blog">Go Back</a>
+    <hr>
 
+    @yield('content')
 
-    <h3>  {{$blog['title']}}</h3>
+    <hr>
 
-    <p>
-        {{$blog['text']}}
-    </p>
-
+    <footer>
+        This is footer
+    </footer>
 
 
 </body>
