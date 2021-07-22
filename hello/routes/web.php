@@ -3,7 +3,9 @@
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,26 @@ use App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+ 
+ 
 
+Route::get('/about', [PageController::class, 'about']);
+
+
+Route::get('/contact', [ContactController::class, 'index']);
+
+Route::post('/contact', [ContactController::class, 'save']);
+
+
+
+
+
+Route::get('/home', function(){
+    return view('index');
+});
+
+
+Route::get('/testi', [PageController::class, 'home']);
 
 
 
@@ -42,9 +63,6 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/create', [BlogController::class, 'create']);
  
 Route::get('/blog/{id}', [BlogController::class, 'show']);
-
-
-
 
 
 
