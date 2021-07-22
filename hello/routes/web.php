@@ -3,6 +3,7 @@
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::get('/blog/{id}', [BlogController::class, 'show']);
 
 
 
+
+
+
+
 Route::get('/blog/{id}/edit', [BlogController::class, 'edit']);
 
 Route::post('/blog/save', [BlogController::class, 'save']);
@@ -53,6 +58,8 @@ Route::post('/blog/{id}', [BlogController::class, 'update']);
 
 
 
+
+Route::post('/comments', [CommentController::class, 'save']);
 
 
 

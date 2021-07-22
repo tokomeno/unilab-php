@@ -17,6 +17,12 @@
 @foreach ($blogs as $blog)
 <h3><a href="/blog/{{$blog->id}}"> {{$blog->title}} </a></h3>
 
+@if ($blog->category)
+<i>
+    {{$blog->category->name}}
+</i>
+@endif
+
 <p>
     {{$blog->text}}
 </p>
