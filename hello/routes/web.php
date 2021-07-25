@@ -21,48 +21,25 @@ use App\Http\Controllers\CommentController;
  
 
 Route::get('/about', [PageController::class, 'about']);
-
-
 Route::get('/contact', [ContactController::class, 'index']);
-
 Route::post('/contact', [ContactController::class, 'save']);
-
-
-
-
-
-Route::get('/home', function(){
-    return view('index');
-});
-
+Route::get('/', [BlogController::class, 'index']);
 
 Route::get('/testi', [PageController::class, 'home']);
 
 
 
-Route::get('/', function () {
-
-    // Blog::create();
-    // $blog = new Blog();
-    // $blog->title = 'this new recorc';
-    // $blog->text = "this is new text for blog";
-    // $blog->save();
-
-    // Blog::create([
-    //     'title' => 'record two',
-    //     'text' => 'text record two',
-    // ]);
-
-    return view('home');
-});
 
 
-
-
-Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/create', [BlogController::class, 'create']);
  
+
+
+ 
+
 Route::get('/blog/{id}', [BlogController::class, 'show']);
+
+
 
 
 

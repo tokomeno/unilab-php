@@ -14,24 +14,20 @@ class BlogController extends Controller
 
         $blogs = Blog::with('category')->latest()->get();
 
-        // dd($blogs->toArray());
 
-        return view('blog', ['blogs' => $blogs]);
+        return view('blog', compact('blogs'));
     }
 
     public function show($id)
-    
     {
 
-         
         $blog = Blog::with(['comments', 'category'])->findOrFail($id);
-        
+
 
         // $blog = Blog::find($id);
         // if(!$blog){
-        //     abort(404);
-        // }
-        
+        // abort(404);
+
 
         return view('blog.show', compact('blog'));
     }
@@ -52,7 +48,7 @@ class BlogController extends Controller
         request()->validate([
             'title' => ['required'],
             'text' => ['required',  'min:10'],
-            'category_id' => ['nullable', 'exists:App\Models\Category,id'] 
+            'category_id' => ['nullable', 'exists:App\Models\Category,id']
         ]);
 
         $blog = new Blog;
@@ -61,12 +57,12 @@ class BlogController extends Controller
         $blog->category_id = request()->category_id;
         $blog->save();
 
-
-        return redirect('/blog');
+        return redirect('/');
     }
 
 
-    public function edit($id){
+    public function edit($id)
+    {
 
         $blog = Blog::findOrFail($id);
 
@@ -74,15 +70,15 @@ class BlogController extends Controller
     }
 
 
-    public function update($id){
+    public function update($id)
+    {
 
-       
+
         $blog = Blog::findOrFail($id);
         $blog->title = request()->title;
         $blog->text = request()->text;
         $blog->save();
 
         return redirect("/blog/{$blog->id}");
-
     }
 }

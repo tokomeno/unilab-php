@@ -22,23 +22,43 @@
                     as possible!</p>
                 <div class="my-5">
 
+                
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if (session()->has('msg'))
+                    <div id="submitSuccessMessage">
+                        <div class="text-center mb-3">
+                            <div class="fw-bolder">
+                                {{session('msg')}}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <form method="POST" action="/contact">
                         @csrf
                         {{-- <input  type="hidden" name="_token" value="asfdasad" /> --}}
 
                         <div class="form-floating">
-                            <input name="name" class="form-control" type="text" placeholder="Enter your name..." />
+                            <input value="{{old('name')}}" name="name" class="form-control" type="text" placeholder="Enter your name..." />
                             <label for="name">Name</label>
                             <div class="invalid-feedback">A name is required.</div>
                         </div>
                         <div class="form-floating">
-                            <input name="email" class="form-control" placeholder="Enter your email..." />
+                            <input  value="{{old('email')}}" name="email" class="form-control" placeholder="Enter your email..." />
                             <label for="email">Email address</label>
                             <div class="invalid-feedback">An email is required.</div>
                             <div class="invalid-feedback">Email is not valid.</div>
                         </div>
                         <div class="form-floating">
-                            <input name="phone" class="form-control" type="tel"
+                            <input  value="{{old('phone')}}" name="phone" class="form-control" type="tel"
                                 placeholder="Enter your phone number..." />
                             <label for="phone">Phone Number</label>
                             <div class="invalid-feedback">A phone number is required.
@@ -46,7 +66,7 @@
                         </div>
                         <div class="form-floating">
                             <textarea name="message" class="form-control" id="message" placeholder="Enter your message here..."
-                                style="height: 12rem"></textarea>
+                                style="height: 12rem">{{old('message')}}</textarea>
                             <label for=" message">Message</label>
                             <div class="invalid-feedback">A message is required.
                             </div>
@@ -55,15 +75,7 @@
 
                          
 
-                        @if (session()->has('msg'))
-                        <div id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">
-                                    {{session('msg')}}
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+                     
 
                         <div class="d-none" id="submitErrorMessage">
                             <div class="text-center text-danger mb-3">Error sending message!</div>

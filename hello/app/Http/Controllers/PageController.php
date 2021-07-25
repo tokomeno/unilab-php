@@ -6,15 +6,21 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function home(){
-        
+
+
+  
+
+    public function home()
+    {
+
         $user = request('name');
         // $user = "Eni";
 
         return view('testi', compact('user'));
     }
 
-    public function about(){
+    public function about()
+    {
         return view('about');
     }
 }

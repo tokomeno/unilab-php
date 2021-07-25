@@ -1,62 +1,35 @@
-@extends('inc.layout')
+@extends('layout.layout')
 
 @section('content')
-
-<a href="/blog">Go Back</a>
-
-
-<a href="/blog/{{$blog->id}}/edit">Edit Blog</a>
-
-
-<h3> {{$blog->title}}</h3>
-
-
-@if ($blog->category)
-<i> {{$blog->category->name}}</i>
-@endif
-
-
-<p>
-    {{$blog->text}}
-</p>
-
-
-<ul>
-    @foreach ($blog->comments as $comment)
-    <li>
-        {{$comment->text}}
-    </li>
-    @endforeach
-</ul>
-
-
-<hr>
-
-
-
-@if ($errors->any())
-@foreach ($errors->all() as $error)
-<li>{{ $error }}</li>
-@endforeach
-@endif
+         
+     <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>{{$blog->title}}</h1>
+                            <span class="meta">
+                             
+                               {{$blog->created_at}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                       {{$blog->text}}
+                    </div>
+                </div>
+            </div>
+        </article>
 
 
 
 
-
-<h4>Add your comment</h4>
-
-
-<form action="/comments" method="POST">
-    @csrf
-
-    <input type="hidden" name="blog_id" value="{{$blog->id}}">
-    <textarea name="text" id="" cols="30" rows="10"></textarea>
-
-    <button>Add comment</button>
-</form>
-
-
-<hr>
-
-@endsection
+     @endsection
