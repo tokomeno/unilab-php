@@ -14,7 +14,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        foreach(['programing', 'marketing', 'social media', 'project manager', 'artist'] as $name){
+        // php artisan db:seed --class=CategorySeeder
+        foreach(['programing', 'marketing', 'social media', 'project manager', 'artist', 'business management', 'frontend programing', 'backend programing'] as $name){
             Category::create([
                 'name' => $name
             ]);

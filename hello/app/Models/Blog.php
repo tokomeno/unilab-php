@@ -20,23 +20,30 @@ class Blog extends Model
 
 
 
-    /**
-     * Get all of the comments for the Blog
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    public function scopeFilter($query)
+    {
+        if (request('search')) {
+            $query->where('title', 'like', "%". request('search') ."%");
+        }
+        if(request('category_id')){
+            $query->where('category_id', request('category_id'));
+        }
+        if(request('date')){
+            $query->whereDate('created_at', '>=', request('date'));
+        }
+        
+    }
+
+
+   
     public function comments()
     {
         return $this->hasMany(Comment::class, 'blog_id', 'id');
+
     }
     
 
-
-    /**
-     * Get the user that owns the Blog
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+ 
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');

@@ -10,6 +10,29 @@
                 <div class="site-heading">
                     <h1>Clean Blog</h1>
                     <span class="subheading">A Blog Theme by Start Bootstrap</span>
+
+                    
+                    <form class="mt-5" method="GET" action="">
+                        <div class="form-control">
+                            <input type="date" value="{{request('date')}}" class="form-control" name="date" placeholder="date">
+                        </div>
+                        <div class="form-control d-flex">
+                            <select class="form-control" name="category_id" id="">
+                                <option value="">Choose Category</option>
+                                @foreach ($categories as $category)
+                                <option
+                                {{-- @if($category->id == request('category_id')) selected @endif --}}
+                                {{$category->id == request('category_id') ? 'selected' : ''}} 
+                                value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                           
+                            <input type="text" value="{{request('search')}}" name="search" placeholder="search blog..." class="form-control">
+                            <button class="btn btn-sm btn-primary ">Search</button>
+                        </div>
+                        
+                        
+                    </form>
                 </div>
             </div>
         </div>
@@ -29,8 +52,11 @@
                     <h2 class="post-title">{{$blog->title}}</h2>
                     <h3 class="post-subtitle">{{$blog->text}}</h3>
                 </a>
+                @if ($blog->category)
+                <i>{{$blog->category->name}}</i>
+                @endif
+
                 <p class="post-meta">
-                   
                     {{$blog->created_at}}
                 </p>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,17 +13,30 @@ class BlogController extends Controller
     public function index()
     {
 
-        $blogs = Blog::with('category')->latest()->get();
+        
+        $blogs = Blog::with('category')->latest()
+            ->filter()
+            ->get();
+
+        // $blogs->load('category');
 
 
-        return view('blog', compact('blogs'));
+         
+        $categories = Category::orderBy('name', 'asc')->get(); 
+
+        return view('blog', compact('blogs', 'categories'));
     }
 
     public function show($id)
     {
 
-        $blog = Blog::with(['comments', 'category'])->findOrFail($id);
+        $blog = Blog::with('category')->findOrFail($id);
 
+
+
+        // $comments = Comment::where('blog_id', $blog->id)->latest()->get();
+        // $comments = $blog->comments()->get();
+        // $comments = $blog->comments;
 
         // $blog = Blog::find($id);
         // if(!$blog){

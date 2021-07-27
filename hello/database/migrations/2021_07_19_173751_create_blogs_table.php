@@ -20,7 +20,7 @@ class CreateBlogsTable extends Migration
             $table->text('text');
         
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
             $table->timestamps();
         });
