@@ -41,13 +41,13 @@
                 {{$comment->text}}
             </div>
             <i>{{$comment->created_at->diffForHumans()}}</i>
+            <i>Author: {{$comment->user->name}}</i>
         </div>
 </article>
 @endforeach
 
 
-
-
+@if (auth()->check())
 <form class="my-5" action="/comments" method="POST">
     @csrf
 
@@ -57,10 +57,12 @@
         <textarea name="text" class="form-control" cols="30" rows="10"></textarea>
     </div>
 
-
     <button type="submit" class="btn btn-primary">Submit</button>
-
 </form>
+@else
+    To add comment please <a href="/login">Login</a> or <a href="/register">Register</a>
+@endif
+
 </div>
 
 

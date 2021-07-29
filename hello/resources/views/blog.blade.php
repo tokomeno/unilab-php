@@ -33,6 +33,14 @@
                         
                         
                     </form>
+
+                    <br>
+
+                @if (session('msg'))
+                <div class="alert alert-primary" role="alert">
+                    {{session('msg')}}
+                  </div>
+                @endif
                 </div>
             </div>
         </div>

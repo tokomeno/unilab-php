@@ -11,7 +11,37 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Contact</a></li>
+
+
+
+
+
+
+
+                @auth
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">{{auth()->user()->name}}</a></li>
+
+                <li class="nav-item">
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button class="btn btn-default nav-link px-lg-3 py-3 py-lg-4" href="/logout">Logout</button>
+                    </form>
+                </li>
+                @endauth
+
+
+                @guest
+
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Login</a></li>
+
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/register">Register</a></li>
+
+                @endguest
+
+
+
+
+
             </ul>
         </div>
     </div>

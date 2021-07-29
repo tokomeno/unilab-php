@@ -32,11 +32,10 @@ class BlogController extends Controller
 
         $blog = Blog::with('category')->findOrFail($id);
 
-
-
         // $comments = Comment::where('blog_id', $blog->id)->latest()->get();
         // $comments = $blog->comments()->get();
-        // $comments = $blog->comments;
+
+         $blog->comments->load('user');
 
         // $blog = Blog::find($id);
         // if(!$blog){
