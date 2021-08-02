@@ -13,13 +13,26 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
+
+
+        Schema::dropIfExists('comments');
+
+
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('text');
 
-        
-            $table->unsignedBigInteger('blog_id');
-            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
+            $table->foreignId('blog_id')
+                ->constrained('blogs')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
 
             $table->timestamps();
         });

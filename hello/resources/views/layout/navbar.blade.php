@@ -11,15 +11,25 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a></li>
-
-
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Contact</a></li>
 
 
 
 
 
                 @auth
+
+
+                @if (auth()->user()->isAdmin())
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('admin.index')}}">Admin</a>
+                </li>
+                @endif
+
+
+
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">{{auth()->user()->name}}</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('blog.create')}}">Add
+                        Blog</a></li>
 
                 <li class="nav-item">
                     <form action="/logout" method="POST">

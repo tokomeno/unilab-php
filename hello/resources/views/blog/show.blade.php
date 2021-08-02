@@ -9,10 +9,36 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="post-heading">
                     <h1>{{$blog->title}}</h1>
+                   
+
+
+                    @if (auth()->check() && $blog->user_id === auth()->id())
+                    <a class="btn btn-sm btn-primary" href="{{route('blog.edit', ['id' => $blog->id])}}">Edit</a>
+
+
+                    <form method="POST" action="{{route('blog.delete', ['id' => $blog->id])}}">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-sm btn-danger" href="{{route('blog.delete', ['id' => $blog->id])}}">Delete</button>
+                    </form>
+
+
+
+                    @endif
+
+
                     <span class="meta">
 
                         {{$blog->created_at}}
+                        <br>
+                        @if ($blog->user)
+                         <i>{{$blog->user->name}}</i>
+                        @else
+                        <i>No author</i>
+                        @endif
                     </span>
+
+
                 </div>
             </div>
         </div>

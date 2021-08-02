@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CommentController; 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,26 +19,43 @@ use App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
- 
+
+
+
+Route::get('/admin', [AdminController::class, 'index'])
+    ->name('admin.index')
+    ->middleware('admin');
+
+
 
 Route::get('/about', [PageController::class, 'about']);
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'save']);
-Route::get('/', [BlogController::class, 'index']);
 Route::get('/home', [BlogController::class, 'index']);
 
-Route::get('/testi', [PageController::class, 'home']);
+
+
+Route::get('/', [BlogController::class, 'index'])->name('blog.index');
+
+Route::get('/blog/create', [BlogController::class, 'create'])
+    ->middleware('auth')
+    ->name('blog.create');
+
+Route::post('/blog/save', [BlogController::class, 'save'])
+    ->middleware('auth')
+    ->name('blog.save');
+
+Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit')->middleware('auth');
 
 
 
-Route::get('/blog/create', [BlogController::class, 'create'])->middleware('auth');
- 
 
-Route::get('/blog/{id}', [BlogController::class, 'show']);
-Route::get('/blog/{id}/edit', [BlogController::class, 'edit']);
-Route::post('/blog/save', [BlogController::class, 'save']);
-Route::post('/blog/{id}', [BlogController::class, 'update']);
+Route::delete('/blog/{id}/delete', [BlogController::class, 'destroy'])->name('blog.delete')->middleware('auth');
+
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+
+
 
 
 Route::post('/comments', [CommentController::class, 'save'])->middleware('auth');
@@ -50,10 +68,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 
 Route::get('/login', [LoginController::class, 'loginView'])
-->middleware('guest')
-->name('login');
+    ->middleware('guest')
+    ->name('login');
 
 
 Route::post('/login', [LoginController::class, 'login']);
-
- 
